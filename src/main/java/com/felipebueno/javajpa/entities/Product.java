@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_product")
@@ -24,6 +25,7 @@ public class Product implements Serializable{
 	private Double price;
 	private String imgUrl;
 	
+	@Transient
 	private Set<Category> categories = new HashSet<>();
 	
 	public Product() {}
