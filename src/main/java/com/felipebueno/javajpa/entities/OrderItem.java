@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.felipebueno.javajpa.entities.pk.OrderItemPK;
 
 @Entity
@@ -15,7 +16,7 @@ public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	
@@ -31,7 +32,8 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
-	
+	// 'lazy loading' não deixa o java ficar em loop infinito buscando os pedidos varias vezes
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
