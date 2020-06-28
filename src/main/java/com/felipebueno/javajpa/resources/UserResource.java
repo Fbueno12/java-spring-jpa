@@ -3,6 +3,8 @@ package com.felipebueno.javajpa.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,7 +40,7 @@ public class UserResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> store(@RequestBody User user) {
+	public ResponseEntity<User> store(@Valid @RequestBody User user) {
 		user = service.store(user);
 		URI uri = ServletUriComponentsBuilder
 					.fromCurrentRequest()

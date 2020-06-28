@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.felipebueno.javajpa.entities.Product;
 import com.felipebueno.javajpa.repositories.ProductRepository;
+import com.felipebueno.javajpa.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -21,6 +22,10 @@ public class ProductService {
 	
 	public Product find(Long id) {
 		Optional<Product> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+	}
+	
+	public Product store(Product product) {
+		return repository.save(product);
 	}
 }

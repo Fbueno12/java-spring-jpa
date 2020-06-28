@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,8 +23,15 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotBlank(message = "name is required")
 	private String name;
+	
+	@NotBlank(message = "email is required")
+	@Email(message = "email is not valid")
 	private String email;
+	
+	@NotBlank(message = "phone is required")
 	private String phone;
 
 	@JsonIgnore

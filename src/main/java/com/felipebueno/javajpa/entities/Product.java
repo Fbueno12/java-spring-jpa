@@ -13,6 +13,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,9 +28,16 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "name is a required field")
+	@Size(max = 60)
 	private String name;
+	
+	@NotBlank(message = "description is a required field")
 	private String description;
+	
+	@NotNull(message = "price is a required field")
 	private Double price;
+	
 	private String imgUrl;
 
 	@ManyToMany
