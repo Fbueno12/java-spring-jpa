@@ -31,6 +31,13 @@ public class UserService {
 	}
 	
 	public User store(User user) {
+		
+		User emailExists = repository.findByEmail(user.getEmail());
+		
+		if(emailExists != null) {
+			throw new DatabaseException("Email already exists!");
+		}
+			
 		return repository.save(user);
 	}
 	
