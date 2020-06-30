@@ -32,6 +32,7 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	
 	// 'lazy loading' não deixa o java ficar em loop infinito buscando os pedidos varias vezes
 	@JsonIgnore
 	public Order getOrder() {
