@@ -45,10 +45,10 @@ public class OrderResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Order> update(@PathVariable Long id, @Valid @RequestBody Order order){
-		order = service.update(id, order);
+	public ResponseEntity<Order> update(@PathVariable Long id, @Valid @RequestBody OrderRequest order){
+		Order neworder = service.update(id, order);
 		
-		return ResponseEntity.ok().body(order);
+		return ResponseEntity.ok().body(neworder);
 	}
 	
 }

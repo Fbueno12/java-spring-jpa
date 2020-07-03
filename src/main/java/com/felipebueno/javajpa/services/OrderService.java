@@ -83,7 +83,7 @@ public class OrderService {
 		}
 	}
 
-	public Order update(Long id, Order order) {
+	public Order update(Long id, OrderRequest order) {
 		try {
 			Order entity = repository.getOne(id);
 			updateData(entity, order);
@@ -95,8 +95,10 @@ public class OrderService {
 
 	}
 
-	private void updateData(Order entity, Order order) {
-		entity.setClient(order.getClient());
+	private void updateData(Order entity, OrderRequest order) {
+		User client = userRepository.getOne(order.getClient_id());
+		
+		entity.setClient(client);
 		entity.setMoment(order.getMoment());
 		entity.setPayment(order.getPayment());
 		entity.setOrderStatus(order.getOrderStatus());

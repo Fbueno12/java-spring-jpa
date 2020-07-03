@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.felipebueno.javajpa.entities.Payment;
 import com.felipebueno.javajpa.entities.enums.OrderStatus;
 import com.felipebueno.javajpa.entities.payloads.types.ItemsType;
 
@@ -19,6 +20,8 @@ public class OrderRequest implements Serializable{
 	@NotNull
 	private OrderStatus orderStatus;
 	
+	private Payment payment;
+	
 	@NotNull
 	private Long client_id;
 	
@@ -26,12 +29,13 @@ public class OrderRequest implements Serializable{
 	
 	public OrderRequest() {}
 	
-	public OrderRequest(Instant moment, OrderStatus orderStatus, Long client_id, List<ItemsType> items) {
+	public OrderRequest(Instant moment, OrderStatus orderStatus, Long client_id, Payment payment, List<ItemsType> items) {
 		super();
 		this.moment = moment;
 		this.orderStatus = orderStatus;
 		this.client_id = client_id;
 		this.items = items;
+		this.payment = payment;
 	}
 
 
@@ -47,6 +51,12 @@ public class OrderRequest implements Serializable{
 	}
 	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+	public Payment getPayment() {
+		return payment;
+	}
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 	public Long getClient_id() {
 		return client_id;
