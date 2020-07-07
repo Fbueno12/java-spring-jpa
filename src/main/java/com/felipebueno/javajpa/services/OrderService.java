@@ -94,6 +94,10 @@ public class OrderService {
 		}
 
 	}
+	
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 
 	private void updateData(Order entity, OrderRequest order) {
 		User client = userRepository.getOne(order.getClient_id());
