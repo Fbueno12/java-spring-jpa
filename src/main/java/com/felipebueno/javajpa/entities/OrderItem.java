@@ -5,10 +5,13 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.felipebueno.javajpa.entities.pk.OrderItemPK;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
@@ -18,6 +21,7 @@ public class OrderItem implements Serializable {
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
 	
+	@NotNull
 	private Integer quantity;
 	
 	private Double price;
@@ -32,6 +36,7 @@ public class OrderItem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	
 	// 'lazy loading' não deixa o java ficar em loop infinito buscando os pedidos varias vezes
 	@JsonIgnore
 	public Order getOrder() {
