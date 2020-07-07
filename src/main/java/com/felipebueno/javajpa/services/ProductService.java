@@ -43,7 +43,7 @@ public class ProductService {
 			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
-		}	
+		}
 	}
 
 	private void updateData(Product entity, Product product) {
@@ -51,15 +51,19 @@ public class ProductService {
 		entity.setDescription(product.getDescription());
 		entity.setImgUrl(product.getImgUrl());
 		entity.setPrice(product.getPrice());
-		entity.getCategories().addAll(product.getCategories());
+
+		if (!product.getCategories().isEmpty()) {
+			entity.getCategories().removeAll(entity.getCategories());
+			entity.getCategories().addAll(product.getCategories());
+		}
 	}
 
 	public void delete(Long id) {
 		try {
-			repository.deleteById(id);			
-		} catch(EmptyResultDataAccessException e) {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
-		} catch(DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
